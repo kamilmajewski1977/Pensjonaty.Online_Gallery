@@ -10,6 +10,8 @@
                 maxParallel: 3,
                 sizes: [],
                 uploadUrl: '/upload.php',
+                fileFieldName: 'images[]',
+                metaFieldName: 'meta',
                 texts: {
                     dropHere: 'Drop images here or click to browse',
                     crop: 'Crop',
@@ -230,6 +232,9 @@
 
         uploadAll() {
             const items = this.collectItems();
+            items.forEach((item, index) => {
+                item.index = index;
+            });
             const queue = items.slice();
             let active = 0;
 
@@ -250,10 +255,19 @@
 
             this.uploadItem = (item, callback) => {
                 const formData = new FormData();
-                formData.append('image', item.file, item.file.name);
-                formData.append('description', item.description);
-                formData.append('alt', item.alt);
-                formData.append('title', item.title);
+                formData.append(this.settings.fileFieldName, item.file, item.file.name);
+
+                if (this.settings.metaFieldName) {
+                    const base = `${this.settings.metaFieldName}[${item.index}]`;
+                    formData.append(`${base}[description]`, item.description);
+                    formData.append(`${base}[alt]`, item.alt);
+                    formData.append(`${base}[title]`, item.title);
+                    formData.append(`${base}[_client_id]`, item.id);
+                } else {
+                    formData.append('description', item.description);
+                    formData.append('alt', item.alt);
+                    formData.append('title', item.title);
+                }
                 if (item.crop) {
                     Object.keys(item.crop).forEach(key => {
                         formData.append('crop[' + key + ']', item.crop[key]);

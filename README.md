@@ -21,9 +21,17 @@ $context = [
     'placement' => 'main',
 ];
 
-$results = $uploader->processUploads($_FILES['images'], $context, function ($processed, $total, $result) {
+$files = $_FILES['images'] ?? [];
+$meta = $_POST['meta'] ?? [];
+
+$results = $uploader->processUploads($files, $context, function ($processed, $total, $result) {
     // Update UI or log upload progress here.
 });
+
+foreach ($results as $index => $result) {
+    $imageMeta = $meta[$index] ?? [];
+    // Persist $imageMeta['alt'], ['title'], ['description'] alongside $result['generated_files'].
+}
 ```
 
 Each uploaded file is renamed following the pattern `property/{id_property}/P{id_property}_B{id_building}_R{id_room}_width-{width}_height-{height}_{index}.jpg` (feature segments are appended automatically when provided). The upload directory, naming format, and available target sizes are configurable through `config/image_config.php`.
@@ -58,6 +66,12 @@ The jQuery plugin in `public/js/image-uploader.js` offers a drag-and-drop experi
 ```
 
 The plugin maintains a local queue, supports concurrent uploads, tracks progress via `<progress>` elements, and posts the crop coordinates alongside metadata.
+
+### Backend integration notes
+
+* The uploader sends each file as `images[]` by default so PHP receives the familiar `$_FILES['images']` structure. You can change the field name via the `fileFieldName` option when initialising the widget.
+* Per-image metadata (description, alt, title) is grouped into the `meta` array indexed in the same order as `$_FILES['images']`. The sample above shows how to combine that metadata with the processed upload results.
+* A `_client_id` property is also included so the backend can correlate a server response with the original DOM element if desired.
 
 ## Database schema
 
