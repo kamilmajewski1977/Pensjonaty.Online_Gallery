@@ -123,6 +123,10 @@
             reader.readAsDataURL(file);
 
             $buttons.find('.po-remove').on('click', () => {
+                const objectUrl = $image.data('objectUrl');
+                if (objectUrl) {
+                    URL.revokeObjectURL(objectUrl);
+                }
                 $item.remove();
             });
         },
@@ -151,11 +155,12 @@
                     $item.addClass('is-cropping');
                     $item.append('<button type="button" class="po-save-crop">' + this.settings.texts.saveCrop + '</button>');
                     $item.find('.po-save-crop').on('click', () => {
-                        this.storeCropData($item, cropper, file.name);
-                        $item.removeClass('is-cropping');
-                        $item.find('.po-save-crop').remove();
-                        cropper.destroy();
-                        cropper = null;
+                        this.storeCropData($item, cropper, file).then(() => {
+                            $item.removeClass('is-cropping');
+                            $item.find('.po-save-crop').remove();
+                            cropper.destroy();
+                            cropper = null;
+                        });
                     });
                 }
             });
@@ -163,9 +168,49 @@
             $image.data('file', file);
         },
 
-        storeCropData($item, cropper, originalName) {
+        storeCropData($item, cropper, originalFile) {
             const cropData = cropper.getData(true);
-            $item.data('crop', Object.assign({ originalName }, cropData));
+            const canvas = cropper.getCroppedCanvas();
+
+            return new Promise(resolve => {
+                if (!canvas) {
+                    $item.data('crop', Object.assign({ originalName: originalFile.name }, cropData));
+                    resolve();
+                    return;
+                }
+
+                canvas.toBlob(blob => {
+                    if (!blob) {
+                        $item.data('crop', Object.assign({ originalName: originalFile.name }, cropData));
+                        resolve();
+                        return;
+                    }
+
+                    const croppedFile = new File([blob], originalFile.name, {
+                        type: originalFile.type || blob.type || 'image/jpeg',
+                        lastModified: Date.now()
+                    });
+
+                    const $image = $item.find('img');
+                    const previousUrl = $image.data('objectUrl');
+                    if (previousUrl) {
+                        URL.revokeObjectURL(previousUrl);
+                    }
+
+                    const objectUrl = URL.createObjectURL(blob);
+                    $image.attr('src', objectUrl);
+                    $image.data('objectUrl', objectUrl);
+                    $image.data('file', croppedFile);
+
+                    $item.data('crop', Object.assign({
+                        originalName: originalFile.name,
+                        outputWidth: canvas.width,
+                        outputHeight: canvas.height
+                    }, cropData));
+
+                    resolve();
+                }, originalFile.type || 'image/jpeg');
+            });
         },
 
         collectItems() {
