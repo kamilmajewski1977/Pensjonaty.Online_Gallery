@@ -29,6 +29,11 @@
             this.$dropZone = $(this.settings.dropZone);
             this.$previewList = $(this.settings.previewList);
             this.$uploadButton = $(this.settings.uploadButton);
+            this.$fileInput = this.$fileInput || $('<input type="file" accept="image/*" multiple style="display:none">');
+
+            if (!$.contains(document.documentElement, this.$fileInput[0])) {
+                $('body').append(this.$fileInput);
+            }
 
             if (!this.$dropZone.find('.po-drop-message').length) {
                 this.$dropZone.prepend('<div class="po-drop-message">' + this.settings.texts.dropHere + '</div>');
@@ -48,12 +53,17 @@
         bindEvents() {
             const self = this;
 
-            this.$dropZone.on('click', function () {
-                $('<input type="file" accept="image/*" multiple>')
-                    .on('change', function (event) {
-                        self.handleFiles(event.target.files);
-                    })
-                    .trigger('click');
+            this.$fileInput.on('change', function (event) {
+                self.handleFiles(event.target.files);
+                $(this).val('');
+            });
+
+            this.$dropZone.on('click', function (event) {
+                if ($(event.target).closest('input, textarea, button, .po-preview-actions, .po-preview-inputs').length) {
+                    return;
+                }
+
+                self.$fileInput.trigger('click');
             });
 
             this.$dropZone.on('dragover', function (event) {
