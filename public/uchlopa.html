@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>U Chłopa – Kompleks Wypoczynkowo-Konferencyjny | Kaszuby</title>
+    <meta name="description" content="U Chłopa w Chmielnie – kompleks wypoczynkowo-konferencyjny nad jeziorem Kłodno. Idealny na rodzinny wypoczynek, konferencje i wydarzenia firmowe." />
+    <meta name="keywords" content="noclegi Chmielno, ośrodek wypoczynkowy Kaszuby, konferencje Kaszuby, rodzinny wypoczynek jezioro Kłodno" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-yH8pC3slO3W9U1k3rVDS7nDzQVk5kP2byBmAKtwL6vFcdlK1YBQnBe5u/hubAlUDqAj1ImbFa+57wCkFZ9+Y5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --primary: #125d63;
+            --primary-dark: #0b3f43;
+            --accent: #e6b467;
+            --sand: #f2ede4;
+            --text: #1f2d30;
+            --muted: #5a6b6f;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Source Sans Pro', sans-serif;
+            color: var(--text);
+            background-color: var(--sand);
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            margin-top: 0;
+            color: var(--primary-dark);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(18, 93, 99, 0.95);
+            backdrop-filter: blur(6px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+        }
+
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 5vw;
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+
+        .top-bar .contact-links span {
+            margin-right: 1.5rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            padding: 0.8rem 5vw 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--white);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            position: relative;
+            padding-bottom: 0.4rem;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            transform: scaleX(1);
+        }
+
+        .hero {
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-align: center;
+            background: linear-gradient(rgba(12, 57, 62, 0.6), rgba(12, 57, 62, 0.6)),
+                        url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80') center/cover fixed;
+            padding: 0 5vw;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            animation: fadeInUp 0.9s ease-in-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 4vw, 4.2rem);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            margin-bottom: 2.5rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.9rem 2.4rem;
+            border-radius: 999px;
+            border: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary-dark);
+            box-shadow: 0 10px 25px rgba(230, 180, 103, 0.35);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        section {
+            padding: 5rem 5vw;
+            background-color: var(--white);
+        }
+
+        section:nth-of-type(even) {
+            background-color: #f7f4ef;
+        }
+
+        .section-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .section-header span {
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            font-size: 0.85rem;
+            color: var(--accent);
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 3vw, 2.8rem);
+            margin: 1rem 0 0.5rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border-radius: 18px;
+            padding: 2rem;
+            box-shadow: 0 20px 35px rgba(18, 93, 99, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 45px rgba(18, 93, 99, 0.12);
+        }
+
+        .feature-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .split {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .split img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .highlight-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0 0;
+        }
+
+        .highlight-list li {
+            margin-bottom: 0.9rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .highlight-list i {
+            color: var(--accent);
+            margin-top: 0.2rem;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery figure {
+            position: relative;
+            overflow: hidden;
+            border-radius: 18px;
+            margin: 0;
+            box-shadow: 0 20px 35px rgba(18, 93, 99, 0.1);
+        }
+
+        .gallery img {
+            width: 100%;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery figure:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery figcaption {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.7));
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .testimonial {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 15px 30px rgba(18, 93, 99, 0.1);
+            position: relative;
+        }
+
+        .testimonial::before {
+            content: '\"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(18, 93, 99, 0.15);
+        }
+
+        .cta-band {
+            background: linear-gradient(135deg, rgba(18, 93, 99, 0.96), rgba(11, 63, 67, 0.96));
+            color: var(--white);
+            padding: 4rem 5vw;
+            text-align: center;
+        }
+
+        .cta-band h2 {
+            color: var(--white);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 15px 30px rgba(18, 93, 99, 0.12);
+        }
+
+        form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        input, textarea, select {
+            padding: 0.85rem 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(18, 93, 99, 0.15);
+            font-family: inherit;
+            font-size: 1rem;
+            background: #f9f7f3;
+        }
+
+        textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        footer {
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 3rem 5vw;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .lang-switcher button {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: var(--white);
+            border-radius: 999px;
+            padding: 0.4rem 1rem;
+            margin-right: 0.5rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .lang-switcher button.active,
+        .lang-switcher button:hover {
+            background: var(--accent);
+            color: var(--primary-dark);
+        }
+
+        .blog-list article {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 15px 30px rgba(18, 93, 99, 0.08);
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .blog-list article time {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar {
+                flex-direction: column;
+                gap: 0.4rem;
+            }
+
+            nav {
+                gap: 1rem;
+            }
+
+            section {
+                padding: 4rem 8vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="branding">
+                <strong>U Chłopa</strong> – Kompleks Wypoczynkowo-Konferencyjny
+            </div>
+            <div class="contact-links">
+                <span><i class="fa-solid fa-location-dot"></i> ul. Wiejska 1, 83-333 Chmielno</span>
+                <span><i class="fa-solid fa-phone"></i> <a href="tel:+48586673421">+48 58 667 34 21</a></span>
+                <span><i class="fa-solid fa-envelope"></i> <a href="mailto:rezerwacje@uchlopa.com">rezerwacje@uchlopa.com</a></span>
+            </div>
+        </div>
+        <nav>
+            <a href="#start" class="active">Start</a>
+            <a href="#onas">O nas</a>
+            <a href="#noclegi">Oferta noclegowa</a>
+            <a href="#konferencje">Konferencje</a>
+            <a href="#atrakcje">Atrakcje</a>
+            <a href="#galeria">Galeria</a>
+            <a href="#blog">Aktualności</a>
+            <a href="#kontakt">Kontakt</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="start" class="hero">
+            <div class="hero-content">
+                <span class="tagline">Kaszuby • Jezioro Kłodno • Chmielno</span>
+                <h1>U Chłopa – zanurz się w komfortowym wypoczynku nad jeziorem</h1>
+                <p>Odkryj kompleks wypoczynkowo-konferencyjny na Kaszubach, w którym natura spotyka elegancję. Rodzinne wakacje, konferencje i wydarzenia firmowe w wyjątkowej scenerii nad jeziorem Kłodno.</p>
+                <div class="btn-group">
+                    <button class="btn btn-primary" data-scroll="noclegi">Sprawdź ofertę</button>
+                    <button class="btn btn-outline" data-scroll="kontakt">Zarezerwuj termin</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="onas">
+            <div class="section-header">
+                <span>O nas</span>
+                <h2>Historia zakorzeniona w kaszubskiej gościnności</h2>
+                <p>Od pokoleń dbamy o to, by każdy gość czuł się tutaj jak w domu – niezależnie od tego, czy przyjeżdża na rodzinny wypoczynek, czy profesjonalne wydarzenie.</p>
+            </div>
+            <div class="split">
+                <img src="https://images.unsplash.com/photo-1505693439213-2d1ec3f66d07?auto=format&fit=crop&w=1200&q=80" alt="Widok na kompleks U Chłopa nad jeziorem Kłodno" loading="lazy" />
+                <div>
+                    <p>Kompleks "U Chłopa" w Chmielnie łączy kaszubską tradycję z nowoczesnymi udogodnieniami. Położony tuż nad brzegiem jeziora Kłodno, oferuje panoramiczne widoki, prywatną plażę i bogatą infrastrukturę dla rodzin oraz klientów biznesowych.</p>
+                    <ul class="highlight-list">
+                        <li><i class="fa-solid fa-leaf"></i> 6 hektarów zieleni, lasów i prywatnej linii brzegowej nad jeziorem Kłodno.</li>
+                        <li><i class="fa-solid fa-hotel"></i> 120 miejsc noclegowych w eleganckich pokojach, apartamentach i domkach premium.</li>
+                        <li><i class="fa-solid fa-people-group"></i> 3 sale konferencyjne na 20–200 osób z pełnym zapleczem technicznym.</li>
+                        <li><i class="fa-solid fa-award"></i> Nagrody i wyróżnienia w branży turystycznej, w tym wysoka ocena na Booking.com (9,1/10).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="noclegi">
+            <div class="section-header">
+                <span>Oferta noclegowa</span>
+                <h2>Komfortowe pokoje i apartamenty z widokiem na wodę</h2>
+                <p>Stworzyliśmy przestrzenie, które zachwycają elegancją, funkcjonalnością oraz bliskością natury.</p>
+            </div>
+            <div class="features-grid">
+                <article class="feature-card">
+                    <i class="fa-solid fa-bed"></i>
+                    <h3>Pokoje Deluxe</h3>
+                    <p>Przestronne pokoje dla par i rodzin (2+2), z balkonem oraz widokiem na jezioro. Wyposażone w klimatyzację, minibar i szybkie Wi-Fi.</p>
+                </article>
+                <article class="feature-card">
+                    <i class="fa-solid fa-house"></i>
+                    <h3>Apartamenty Rodzinne</h3>
+                    <p>Dwupoziomowe apartamenty z aneksem kuchennym, prywatnym tarasem i bezpośrednim wyjściem na ogród – idealne na dłuższy pobyt.</p>
+                </article>
+                <article class="feature-card">
+                    <i class="fa-solid fa-fire"></i>
+                    <h3>Domki Kaszubskie</h3>
+                    <p>Nastrojowe drewniane domki inspirowane tradycją regionu. Każdy wyposażony w kominek, strefę relaksu i prywatną saunę.</p>
+                </article>
+                <article class="feature-card">
+                    <i class="fa-solid fa-spa"></i>
+                    <h3>Strefa Wellness</h3>
+                    <p>Basen z widokiem na jezioro, jacuzzi, sauny oraz gabinety masażu. Codzienne zajęcia jogi i porannego rozciągania na pomoście.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="konferencje">
+            <div class="section-header">
+                <span>Konferencje i szkolenia</span>
+                <h2>Profesjonalna oprawa spotkań biznesowych</h2>
+                <p>Nowoczesna infrastruktura konferencyjna połączona z wyjątkową lokalizacją nad jeziorem gwarantuje sukces każdego wydarzenia.</p>
+            </div>
+            <div class="split">
+                <div>
+                    <h3>Sale konferencyjne</h3>
+                    <p>Dysponujemy trzema w pełni wyposażonymi salami (120 m², 220 m² i 320 m²) z panoramicznymi oknami, systemem zaciemniania, nowoczesnym nagłośnieniem i światłem dziennym.</p>
+                    <ul class="highlight-list">
+                        <li><i class="fa-solid fa-display"></i> Projektory laserowe 4K, ściany LED, streaming hybrydowy, tłumaczenia symultaniczne.</li>
+                        <li><i class="fa-solid fa-mug-saucer"></i> Zaplecze cateringowe: przerwy kawowe, kolacje degustacyjne, grill nad jeziorem.</li>
+                        <li><i class="fa-solid fa-users-line"></i> Dedykowany opiekun wydarzenia, scenariusz integracji oraz aktywności outdoor.</li>
+                        <li><i class="fa-solid fa-shuttle-van"></i> Transfery z lotniska w Gdańsku, parking na 150 miejsc.</li>
+                    </ul>
+                </div>
+                <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1200&q=80" alt="Nowoczesna sala konferencyjna z widokiem na jezioro" loading="lazy" />
+            </div>
+            <div class="cta-band" data-scroll-target="kontakt">
+                <h2>Zapytaj o ofertę szytą na miarę</h2>
+                <p>Skontaktuj się z naszym działem MICE i zaplanuj niezapomniane wydarzenie firmowe, konferencję lub szkolenie.</p>
+                <button class="btn btn-primary" data-scroll="kontakt">Wyślij zapytanie</button>
+            </div>
+        </section>
+
+        <section id="atrakcje">
+            <div class="section-header">
+                <span>Atrakcje</span>
+                <h2>Aktywny wypoczynek i relaks w rytmie natury</h2>
+                <p>Zaplanuj swój czas nad jeziorem: od porannego kajakowania po wieczorne ogniska i koncerty na molo.</p>
+            </div>
+            <div class="features-grid">
+                <article class="feature-card">
+                    <i class="fa-solid fa-person-swimming"></i>
+                    <h3>Prywatna plaża</h3>
+                    <p>Strzeżona plaża, pomost z leżakami, wypożyczalnia kajaków i SUP, strefa zabaw dla dzieci.</p>
+                </article>
+                <article class="feature-card">
+                    <i class="fa-solid fa-bicycle"></i>
+                    <h3>Aktywny wypoczynek</h3>
+                    <p>Trasy rowerowe i nordic walking, boiska wielofunkcyjne, zajęcia fitness, joga na trawie.</p>
+                </article>
+                <article class="feature-card">
+                    <i class="fa-solid fa-children"></i>
+                    <h3>Rodzinne animacje</h3>
+                    <p>Klub malucha, tematyczne warsztaty, kino plenerowe, zajęcia edukacyjne o kulturze Kaszub.</p>
+                </article>
+                <article class="feature-card">
+                    <i class="fa-solid fa-champagne-glasses"></i>
+                    <h3>Wieczorne eventy</h3>
+                    <p>Koncerty szantowe, ogniska z pieczeniem kaszubskich przysmaków, degustacje lokalnych produktów.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="galeria">
+            <div class="section-header">
+                <span>Galeria</span>
+                <h2>Przeżyj Kaszuby w obiektywie 4K</h2>
+                <p>Wysokiej jakości fotografie i wideo prezentujące najpiękniejsze zakątki naszego kompleksu.</p>
+            </div>
+            <div class="gallery">
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1476041800959-2f6bb412c8ce?auto=format&fit=crop&w=800&q=80" alt="Jezioro Kłodno o zachodzie słońca" loading="lazy" />
+                    <figcaption>Jezioro Kłodno o zachodzie słońca</figcaption>
+                </figure>
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=800&q=80" alt="Elegancki pokój hotelowy z widokiem" loading="lazy" />
+                    <figcaption>Eleganckie pokoje i apartamenty</figcaption>
+                </figure>
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1511576661531-b34d7da5d0bb?auto=format&fit=crop&w=800&q=80" alt="Sala konferencyjna" loading="lazy" />
+                    <figcaption>Nowoczesne sale konferencyjne</figcaption>
+                </figure>
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80" alt="Rodzina na pomoście" loading="lazy" />
+                    <figcaption>Rodzinne chwile na pomoście</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section id="blog">
+            <div class="section-header">
+                <span>Aktualności</span>
+                <h2>Blog i wydarzenia sezonowe</h2>
+                <p>Regularnie dzielimy się inspiracjami na aktywny wypoczynek oraz informacjami o naszych pakietach specjalnych.</p>
+            </div>
+            <div class="blog-list features-grid">
+                <article>
+                    <time datetime="2024-06-01">Czerwiec 2024</time>
+                    <h3>Letnie rejsy po jeziorze Kłodno</h3>
+                    <p>Nowe pakiety rejsów z degustacją kaszubskich specjałów i wieczornym koncertem na pokładzie. Idealne dla grup i rodzin.</p>
+                    <a href="#" class="read-more">Czytaj więcej</a>
+                </article>
+                <article>
+                    <time datetime="2024-05-12">Maj 2024</time>
+                    <h3>Konferencja w stylu green meeting</h3>
+                    <p>Dowiedz się, jak zaplanować wydarzenie firmowe w duchu zrównoważonego rozwoju – poznaj nasze rekomendacje i narzędzia.</p>
+                    <a href="#" class="read-more">Czytaj więcej</a>
+                </article>
+                <article>
+                    <time datetime="2024-04-20">Kwiecień 2024</time>
+                    <h3>Rodzinne Święta Wielkanocne na Kaszubach</h3>
+                    <p>Wyjątkowa oferta świąteczna z animacjami dla dzieci, tradycyjnymi potrawami i warsztatami malowania pisanek.</p>
+                    <a href="#" class="read-more">Czytaj więcej</a>
+                </article>
+            </div>
+        </section>
+
+        <section id="opinie">
+            <div class="section-header">
+                <span>Goście mówią</span>
+                <h2>Opinie, które budują zaufanie</h2>
+                <p>Średnia ocena 9,1 na Booking.com. Z dumą prezentujemy wypowiedzi naszych gości.</p>
+            </div>
+            <div class="testimonials">
+                <article class="testimonial">
+                    <p>„Wyjątkowe miejsce na rodzinny wypoczynek! Dzieciaki zachwycone animacjami, a my błogim relaksem w strefie wellness. Polecamy każdemu, kto szuka spokoju i luksusu jednocześnie.”</p>
+                    <strong>Anna i Michał, Gdańsk</strong>
+                </article>
+                <article class="testimonial">
+                    <p>„Konferencja dopięta na ostatni guzik – od techniki, przez catering, po wieczorną integrację na pomoście. Zespół U Chłopa to profesjonaliści.”</p>
+                    <strong>Karolina, HR Manager</strong>
+                </article>
+                <article class="testimonial">
+                    <p>„Spędziliśmy tu weekend we dwoje. Komfortowy pokój z widokiem na jezioro i niesamowita kuchnia regionalna. Na pewno wrócimy!”</p>
+                    <strong>Maciej, Warszawa</strong>
+                </article>
+            </div>
+        </section>
+
+        <section id="kontakt">
+            <div class="section-header">
+                <span>Kontakt</span>
+                <h2>Zarezerwuj pobyt lub zapytaj o ofertę</h2>
+                <p>Wypełnij formularz lub skontaktuj się z nami bezpośrednio – odpowiemy w ciągu 24 godzin.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3>Dane kontaktowe</h3>
+                    <p><strong>Adres:</strong> ul. Wiejska 1, 83-333 Chmielno, Polska</p>
+                    <p><strong>Telefon:</strong> <a href="tel:+48586673421">+48 58 667 34 21</a></p>
+                    <p><strong>Email:</strong> <a href="mailto:rezerwacje@uchlopa.com">rezerwacje@uchlopa.com</a></p>
+                    <p><strong>Godziny pracy recepcji:</strong> 7:00 – 22:00 (7 dni w tygodniu)</p>
+                    <div class="lang-switcher" aria-label="Zmiana języka">
+                        <button type="button" class="active" data-lang="pl">PL</button>
+                        <button type="button" data-lang="en">EN</button>
+                        <button type="button" data-lang="de">DE</button>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.instagram.com" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <h3>Formularz zapytania</h3>
+                    <form id="contactForm" action="#" method="post">
+                        <label for="name">Imię i nazwisko*</label>
+                        <input type="text" id="name" name="name" required />
+                        <label for="email">Email*</label>
+                        <input type="email" id="email" name="email" required />
+                        <label for="phone">Telefon</label>
+                        <input type="tel" id="phone" name="phone" />
+                        <label for="type">Rodzaj zapytania*</label>
+                        <select id="type" name="type" required>
+                            <option value="">Wybierz...</option>
+                            <option value="leisure">Pobyt wypoczynkowy</option>
+                            <option value="family">Rodzinny pakiet</option>
+                            <option value="conference">Konferencja / szkolenie</option>
+                            <option value="event">Wydarzenie firmowe</option>
+                        </select>
+                        <label for="message">Treść wiadomości*</label>
+                        <textarea id="message" name="message" required></textarea>
+                        <label class="checkbox">
+                            <input type="checkbox" id="rodo" required />
+                            <span>Wyrażam zgodę na przetwarzanie danych osobowych zgodnie z polityką prywatności.</span>
+                        </label>
+                        <button type="submit" class="btn btn-primary">Wyślij zapytanie</button>
+                        <p class="form-feedback" role="alert" aria-live="polite"></p>
+                    </form>
+                </div>
+                <div class="contact-card">
+                    <h3>Jak do nas trafić?</h3>
+                    <p>40 minut od Trójmiasta, 30 minut od Kartuz. Dogodny dojazd samochodem oraz komunikacją miejską.</p>
+                    <div class="map-container">
+                        <iframe title="Mapa dojazdu" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19350.737090104377!2d18.1083251!3d54.33344695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46fd3dd5118d6243%3A0x80d30dbde70a6ac3!2sChmielno!5e0!3m2!1spl!2spl!4v1700000000000!5m2!1spl!2spl" width="100%" height="260" style="border:0; border-radius: 12px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h4>U Chłopa</h4>
+                <p>Kompleks wypoczynkowo-konferencyjny nad jeziorem Kłodno. Komfortowe noclegi, sale konferencyjne, atrakcje rodzinne i kulinarne.</p>
+            </div>
+            <div>
+                <h4>Szybkie linki</h4>
+                <ul class="highlight-list">
+                    <li><a href="#noclegi">Oferta noclegowa</a></li>
+                    <li><a href="#konferencje">Oferta konferencyjna</a></li>
+                    <li><a href="#atrakcje">Atrakcje</a></li>
+                    <li><a href="#blog">Aktualności</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Dokumenty</h4>
+                <ul class="highlight-list">
+                    <li><a href="#">Polityka prywatności</a></li>
+                    <li><a href="#">Regulamin</a></li>
+                    <li><a href="#">Polityka cookies</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Newsletter</h4>
+                <p>Zapisz się, aby otrzymywać oferty specjalne, pakiety sezonowe i informacje o wydarzeniach.</p>
+                <form id="newsletterForm" action="#">
+                    <label for="newsletterEmail" class="sr-only">Adres e-mail</label>
+                    <input type="email" id="newsletterEmail" name="newsletterEmail" placeholder="Twój email" required />
+                    <button type="submit" class="btn btn-primary" style="margin-top: 0.8rem;">Zapisz się</button>
+                    <p class="newsletter-feedback" role="alert" aria-live="polite"></p>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© <span id="year"></span> U Chłopa – Kompleks Wypoczynkowo-Konferencyjny</span>
+            <span>Projekt i wdrożenie: Pensjonaty.Online</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-3gJwYpihydz+0r92Zb4WKZQ0JSe3uG0zE2i0lKws4n8=" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+            const sections = $('section');
+            const navLinks = $('nav a');
+
+            // Smooth scroll
+            $('[data-scroll]').on('click', function () {
+                const targetId = $(this).data('scroll');
+                const target = $('#' + targetId);
+                if (target.length) {
+                    $('html, body').animate({ scrollTop: target.offset().top - 90 }, 700);
+                }
+            });
+
+            navLinks.on('click', function (e) {
+                const href = $(this).attr('href');
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = $(href);
+                    if (target.length) {
+                        $('html, body').animate({ scrollTop: target.offset().top - 90 }, 700);
+                    }
+                }
+            });
+
+            // Active link on scroll
+            $(window).on('scroll', function () {
+                const scrollPos = $(document).scrollTop();
+                sections.each(function () {
+                    const top = $(this).offset().top - 120;
+                    const bottom = top + $(this).outerHeight();
+                    if (scrollPos >= top && scrollPos < bottom) {
+                        const id = $(this).attr('id');
+                        navLinks.removeClass('active');
+                        $("nav a[href='#" + id + "']").addClass('active');
+                    }
+                });
+            });
+
+            // Contact form feedback (dummy handler)
+            $('#contactForm').on('submit', function (e) {
+                e.preventDefault();
+                const feedback = $(this).find('.form-feedback');
+                feedback.text('Dziękujemy! Skontaktujemy się w ciągu 24 godzin.').css('color', '#0b7a3c');
+                this.reset();
+            });
+
+            // Newsletter feedback
+            $('#newsletterForm').on('submit', function (e) {
+                e.preventDefault();
+                const feedback = $(this).find('.newsletter-feedback');
+                feedback.text('Zapis zakończony sukcesem! Sprawdź skrzynkę pocztową.').css('color', '#0b7a3c');
+                this.reset();
+            });
+
+            // Language toggle placeholder
+            $('.lang-switcher button').on('click', function () {
+                $('.lang-switcher button').removeClass('active');
+                $(this).addClass('active');
+                const lang = $(this).data('lang');
+                console.log('Przełączono język na:', lang);
+            });
+
+            // Current year
+            $('#year').text(new Date().getFullYear());
+        });
+    </script>
+</body>
+</html>
